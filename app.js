@@ -15,7 +15,7 @@ let statsSort = {
 
 console.log("🔥 APP JS LOADED:", new Date().toISOString());
 
-console.log("Netlify auto deploy test");
+console.log("Netlify connected ✔");
 
 document.addEventListener("DOMContentLoaded", () => {
 
