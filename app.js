@@ -2,9 +2,7 @@
 // STATE
 // ============================
 
-let players = [];
-
-
+let players = JSON.parse(localStorage.getItem("players") || "[]");
 let editMode = false;
 let statsSort = {
     key: "setsPct", // tri par défaut
@@ -21,7 +19,6 @@ console.log("Netlify connected ✔");
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    loadPlayers();
     initEditMode();
     initHeightSelectors();
     renderPlayers();
@@ -40,21 +37,6 @@ if ('serviceWorker' in navigator) {
 // ============================
 // MODE ÉDITION
 // ============================
-
-async function loadPlayers() {
-    try {
-        const res = await fetch("https://volleyball-backend-vegb.onrender.com/players");
-        players = await res.json();
-
-        console.log("Players chargés:", players);
-
-        // 👉 ici tu peux rafraîchir ton UI
-        displayPlayers(); // si tu as une fonction comme ça
-
-    } catch (err) {
-        console.error("Erreur chargement joueurs:", err);
-    }
-}
 
 function initEditMode() {
     editMode = false;
@@ -145,17 +127,8 @@ function saveMatches() {
     setMatches(getMatches());
 }
 
-async function savePlayer(player) {
-    await fetch("https://volleyball-backend-vegb.onrender.com/players", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(player)
-    });
-
-    // recharge les joueurs après ajout
-    loadPlayers();
+function savePlayers() {
+    localStorage.setItem("players", JSON.stringify(players));
 }
 
 // ============================
@@ -299,7 +272,7 @@ function updateHeight(i, field, value) {
 // ACTIONS JOUEURS
 // ============================
 
-async function addPlayer() {
+function addPlayer() {
 
     const sex = document.querySelector('input[name="sex"]:checked').value;
 
@@ -320,27 +293,13 @@ async function addPlayer() {
         return;
     }
 
-    try {
-        // 🔥 ENVOI AU BACKEND
-        await fetch("https://volleyball-backend-vegb.onrender.com/players", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(p)
-        });
+    players.push(p);
+    savePlayers();
+    renderPlayers();
+    clearInputs();
 
-        // 🔥 RECHARGER DEPUIS LA DB
-        await loadPlayers();
-
-        // UI
-        renderPlayers();
-        clearInputs();
-        toggleNewPlayer();
-
-    } catch (err) {
-        console.error("Erreur ajout joueur:", err);
-    }
+    // UX : refermer le formulaire
+    toggleNewPlayer();
 }
 
 function clearInputs() {
