@@ -2,7 +2,9 @@
 // STATE
 // ============================
 
-let players = JSON.parse(localStorage.getItem("players") || "[]");
+let players = [];
+
+
 let editMode = false;
 let statsSort = {
     key: "setsPct", // tri par défaut
@@ -19,6 +21,7 @@ console.log("Netlify connected ✔");
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    loadPlayers();
     initEditMode();
     initHeightSelectors();
     renderPlayers();
@@ -37,6 +40,21 @@ if ('serviceWorker' in navigator) {
 // ============================
 // MODE ÉDITION
 // ============================
+
+async function loadPlayers() {
+    try {
+        const res = await fetch("https://volleyball-backend-vegb.onrender.com/players");
+        players = await res.json();
+
+        console.log("Players chargés:", players);
+
+        // 👉 ici tu peux rafraîchir ton UI
+        displayPlayers(); // si tu as une fonction comme ça
+
+    } catch (err) {
+        console.error("Erreur chargement joueurs:", err);
+    }
+}
 
 function initEditMode() {
     editMode = false;
@@ -127,8 +145,17 @@ function saveMatches() {
     setMatches(getMatches());
 }
 
-function savePlayers() {
-    localStorage.setItem("players", JSON.stringify(players));
+async function savePlayer(player) {
+    await fetch("https://volleyball-backend-vegb.onrender.com/players", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(player)
+    });
+
+    // recharge les joueurs après ajout
+    loadPlayers();
 }
 
 // ============================
