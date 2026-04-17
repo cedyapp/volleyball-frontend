@@ -1,0 +1,487 @@
+/* =========================
+   BASE
+========================= */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont;
+    background: #f2f2f7;
+}
+
+.container {
+    padding: 15px;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* =========================
+   CARDS / UI
+========================= */
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.team {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.primary {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #007aff;
+    color: white;
+    font-size: 16px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   ROW FLEX
+========================= */
+.row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.row input,
+.row select {
+    flex: 1;
+}
+
+/* Sexe */
+.sex-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+#saveMatchBtn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #65ba43;
+    color: white;
+    font-size: 16px;
+}
+
+#savePlayerBtn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #65ba43;
+    color: white;
+    font-size: 16px;
+}
+
+#toggleNewBtn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #007aff;
+    color: white;
+    font-size: 16px;
+}
+
+#editBtn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #007aff;
+    color: white;
+    font-size: 16px;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tab { display: none; }
+.tab.active { display: block; }
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #007aff;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+
+}
+
+.tabs button:hover {
+    background: #005ecb;
+    transform: translateY(-2px);
+}
+
+.tabs button.active {
+    background: #34c759; /* vert style iOS */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.tabs button {
+    transition: all 0.2s ease;
+}
+
+.tabs button:nth-child(1).active { background: #ff0011; }  /* Générateur */
+.tabs button:nth-child(2).active { background: #ff9500; }  /* Historique */
+.tabs button:nth-child(3).active { background: #34c759; }  /* Stats */
+
+
+/* =========================
+   TABS Statistique 
+========================= */
+
+#statsContent .teams-table td:nth-child(2) {
+    text-align: left;
+    font-weight: 500;
+}
+
+#statsContent .match-card {
+    padding: 15px;
+}
+
+#statsContent th {
+    cursor: pointer;
+    user-select: none;
+}
+
+#statsContent th:hover {
+    background-color: #005ecb;
+}
+
+/* hover seulement sur colonnes triables */
+#statsContent th.no-sort {
+    pointer-events: none;
+}
+
+.reset-btn {
+    border: none;
+    background: #007aff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background: #005ecb;
+}
+
+/* =========================
+   TABS HISTORIQUE MATCH
+========================= */
+
+.teams-grid {
+    margin-top: 10px;
+}
+
+.teams-grid .row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.teams-grid .row span:first-child {
+    font-weight: bold;
+    color: #555;
+}
+
+.sets {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.set {
+    background: #f2f7ff;
+    padding: 6px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+}
+
+.set input {
+    width: 65px;
+    text-align: center;
+}
+
+.match-card {
+    background: white;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.match-score {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0 10px;
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.lock-badge {
+  background: #222;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+/* set gagnant (ligne individuelle) */
+.set-win {
+    font-weight: bold;
+    background-color: #1eb140 !important;
+}
+
+/* équipe gagnante (colonne complète) */
+.team-win {
+    font-weight: bold;
+    color: #3a7021;
+}
+
+
+/* =========================
+   TABLEAU
+========================= */
+#playersTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    table-layout: fixed; /* IMPORTANT pour équilibrer */
+}
+
+/* cellules */
+#playersTable th,
+#playersTable td {
+    border: 1px solid #d0d7de;
+    padding: 6px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* header */
+#playersTable th {
+    background-color: #007aff;
+    color: white;
+}
+
+/* alternance */
+#playersTable tbody tr:nth-child(even) {
+    background-color: #f2f7ff;
+}
+
+/* ligne totals */
+.totals-row {
+    background: #e8f0ff !important;
+    font-weight: bold;
+}
+
+.totals-row td {
+    border-top: 2px solid #007aff;
+}
+
+.ok {
+    background-color: #d4edda !important;
+    color: #155724;
+}
+
+.ko {
+    background-color: #f8d7da !important;
+    color: #721c24;
+}
+
+.cell-text {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+/* =========================
+   LARGEURS COLONNES (clé)
+========================= */
+
+/* Présence */
+#playersTable th:nth-child(1),
+#playersTable td:nth-child(1) {
+    width: 50px;
+}
+
+/* Nom (réduit mais lisible) */
+#playersTable th:nth-child(2),
+#playersTable td:nth-child(2) {
+    width: 110px;
+    text-align: left;
+}
+
+/* Sexe */
+#playersTable th:nth-child(3),
+#playersTable td:nth-child(3) {
+    width: 60px;
+}
+
+/* Grandeur (plus large) */
+#playersTable th:nth-child(4),
+#playersTable td:nth-child(4) {
+    width: 130px;
+}
+
+/* Colonnes stats équilibrées */
+#playersTable th:nth-child(5),
+#playersTable th:nth-child(6),
+#playersTable th:nth-child(7),
+#playersTable th:nth-child(8),
+#playersTable td:nth-child(5),
+#playersTable td:nth-child(6),
+#playersTable td:nth-child(7),
+#playersTable td:nth-child(8) {
+    width: 70px;
+}
+
+/* Supprimer */
+#playersTable th:nth-child(9),
+#playersTable td:nth-child(9) {
+    width: 50px;
+}
+
+/* =========================
+   INPUTS DANS TABLE
+========================= */
+#playersTable input,
+#playersTable select {
+    width: 100%;
+    padding: 4px;
+    font-size: 13px;
+    background: white;
+    border: 1px solid transparent;
+}
+
+/* mode édition ON */
+.edit-mode #playersTable input,
+.edit-mode #playersTable select {
+    border: 1px dashed #999;
+}
+
+/* mode OFF */
+.view-mode #playersTable input,
+.view-mode #playersTable select {
+    border: 1px solid transparent;
+}
+
+/* pas de gris disabled */
+input:disabled,
+select:disabled {
+    background: white;
+    color: black;
+    opacity: 1;
+}
+
+/* =========================
+   GRANDEUR (IMPORTANT)
+========================= */
+
+/* conteneur pieds/pouces */
+.height-cell {
+    display: flex;
+    gap: 4px;
+}
+
+/* réduire largeur selects */
+.height-cell select {
+    width: 48%;
+    min-width: 0;
+    padding: 2px;
+    font-size: 13px;
+}
+
+/* affichage texte (mode OFF) */
+.height-text {
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* =========================
+   TABLEAU ÉQUIPE GÉNÉRER
+========================= */
+
+.teams-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.teams-table th,
+.teams-table td {
+    border: 1px solid #d0d7de;
+    padding: 8px;
+    text-align: center;
+}
+
+/* header */
+.teams-table th {
+    background-color: #007aff;
+    color: white;
+}
+
+/* alternance */
+.teams-table tbody tr:nth-child(even) {
+    background-color: #f2f7ff;
+}
+
+/* lignes score */
+.score-row {
+    font-weight: bold;
+    background-color: #e8f0ff !important;
+}

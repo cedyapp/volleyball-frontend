@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="manifest" href="/manifest.json">
+
+<script src="/app.js" defer></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+}
+</script>
+<script src="/app.js?v=1.0.0"></script>
+
+<link rel="stylesheet" href="/style.css">
+
+<title>Volleyball Teams</title>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<div class="tabs">
+    <button onclick="showTab('generator')">🏐 Générateur d'équipes 🎲</button>
+    <button onclick="showTab('history')">🏐 Historique de match 📜</button>
+    <button onclick="showTab('stats')">🏐 Statistiques joueurs 📊</button>
+</div>
+
+<!-- ========================= -->
+<!-- ONGLET GENERATEUR -->
+<!-- ========================= -->
+
+<div id="generatorTab" class="tab active">
+
+    <button class="primary" onclick="generate()">Générer</button>
+
+    <div id="result"></div>
+
+    <h3>
+        NOUVEAU JOUEUR
+        <button onclick="toggleNewPlayer()" id="toggleNewBtn">Afficher</button>
+    </h3>
+
+    <div id="newPlayerForm" style="display:none;">
+        <div class="card">
+
+            <div class="row">
+                <input id="newName" placeholder="Nom">
+
+                <div class="sex-group">
+                    <label>
+                        <input type="radio" name="sex" value="M" checked> Homme
+                    </label>
+                    <label>
+                        <input type="radio" name="sex" value="F"> Femme
+                    </label>
+                </div>
+
+                <select id="newFt"></select>
+                <select id="newIn"></select>
+            </div>
+
+            <div class="row">
+                <input type="number" id="newP" min="0" max="10" placeholder="Passe">
+                <input type="number" id="newC" min="0" max="10" placeholder="Centre">
+                <input type="number" id="newA" min="0" max="10" placeholder="Attaque">
+                <input type="number" id="newT" min="0" max="10" placeholder="Technique">
+            </div>
+
+            <button onclick="addPlayer()">Ajouter</button>
+        </div>
+    </div>
+
+    <h3>
+        JOUEURS EXISTANTS
+        <button onclick="toggleEdit()" id="editBtn">Mode édition : OFF</button>
+        <button onclick="savePlayers(); alert('Liste de joueurs sauvegardé !')" id="savePlayerBtn">Sauvegarder joueurs
+</button>
+
+    </h3>
+
+    <table class="table" id="playersTable">
+        <thead>
+            <tr>
+                <th>Présent</th>
+                <th>Nom</th>
+                <th>Sexe</th>
+                <th>Grandeur</th>
+                <th>Passe</th>
+                <th>Centre</th>
+                <th>Attaque</th>
+                <th>Technique</th>
+                <th>❌</th>
+            </tr>
+        </thead>
+        <tbody></tbody> 
+    </table>
+    
+</div>
+
+<!-- ========================= -->
+<!-- ONGLET MATCHS -->
+<!-- ========================= -->
+
+<div id="historyTab" class="tab">
+
+    <div id="historyContent"></div>
+
+</div>
+
+<!-- ========================= -->
+<!-- ONGLET STATS -->
+<!-- ========================= -->
+
+<div id="statsTab" class="tab">
+
+    <div id="statsContent"></div>
+
+</div>
+
+</body>
+</html>
