@@ -299,7 +299,7 @@ function updateHeight(i, field, value) {
 // ACTIONS JOUEURS
 // ============================
 
-function addPlayer() {
+async function addPlayer() {
 
     const sex = document.querySelector('input[name="sex"]:checked').value;
 
@@ -320,13 +320,27 @@ function addPlayer() {
         return;
     }
 
-    players.push(p);
-    savePlayers();
-    renderPlayers();
-    clearInputs();
+    try {
+        // 🔥 ENVOI AU BACKEND
+        await fetch("https://volleyball-backend-vegb.onrender.com/players", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(p)
+        });
 
-    // UX : refermer le formulaire
-    toggleNewPlayer();
+        // 🔥 RECHARGER DEPUIS LA DB
+        await loadPlayers();
+
+        // UI
+        renderPlayers();
+        clearInputs();
+        toggleNewPlayer();
+
+    } catch (err) {
+        console.error("Erreur ajout joueur:", err);
+    }
 }
 
 function clearInputs() {
